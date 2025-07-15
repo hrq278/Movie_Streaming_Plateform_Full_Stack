@@ -111,7 +111,7 @@ const logout = asyncHandler( async (req, res) => {
     .clearCookie("accessToken",cookieOptions)
     .clearCookie("refreshToken",cookieOptions)
     .json(
-        new ApiResponse(200, {}, "User Logout Successfully")
+        new ApiResponse(200, {}, `${req.user.fullName} Logout Successfully`)
     )
     
 })
