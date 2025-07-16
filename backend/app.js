@@ -20,6 +20,7 @@ app.use(urlencoded({ extended: true, limit:"100kb" }))
 import authRoutes from "./routes/auth.routes.js"
 import movieRoutes from "./routes/movie.routes.js"
 import tvShowRoutes from "./routes/tvShow.routes.js"
+import searchRoutes from "./routes/search.routes.js"
 
 import verifyJWT from "./middlewares/auth.middlewares.js"
 
@@ -28,5 +29,6 @@ import verifyJWT from "./middlewares/auth.middlewares.js"
 app.use("/api/user/auth",authRoutes)
 app.use("/api/user/movie",verifyJWT, movieRoutes)
 app.use("/api/user/tvshow",verifyJWT ,tvShowRoutes)
+app.use("/api/user/search",verifyJWT ,searchRoutes)
 
 export { app }
