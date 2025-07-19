@@ -7,7 +7,7 @@ const Footer = () => {
         <div className='w-full h-min bg-gray-900  text-gray-300 p-10'>
             <div className='flex flex-col text-center w-full items-center'>   
             <div className=''>
-                <p className='hover:text-white font-bold text-lg cursor-pointer w-50  '>Built By{" "}
+                <p className='hover:text-white font-bold text-lg cursor-pointer w-100  '>Built By{" "}
                   <a 
                   href='https://www.github.com/hrq278'
                   target='_blank'
