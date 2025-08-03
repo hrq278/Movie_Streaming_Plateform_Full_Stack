@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
+import useAuthStore from '../store/authUser.store'
 
 const LoginPage = () => {
 
@@ -8,9 +9,12 @@ const LoginPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  const { login } = useAuthStore()
+
   const handleLogin = (e) => {
       e.preventDefault()
-      console.log({email, password})
+      login({email, password})
+     
   }
 
 

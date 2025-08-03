@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
 import { ChevronRight } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 const HeroPage = () => {
     const [email, setEmail] =useState()
+    const navigate = useNavigate()
 
-    const handleEmailSubmit =() =>{
+    const handleEmailSubmit =(e) =>{
+        e.preventDefault()
+        setEmail(email)
+        navigate(`/signup?email=${email}`)
         console.log({email})
     }
   return (

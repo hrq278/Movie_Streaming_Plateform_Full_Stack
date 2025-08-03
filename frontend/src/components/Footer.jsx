@@ -19,22 +19,22 @@ const Footer = () => {
             </div>
 
             <div className='flex flex-col flex-wrap justify-evenly items-center my-3 py-2   '>
-                <Link to={"#"}>
+                <Link to={"https://www.github.com/hrq278"}>
                 <p className='hover:text-white cursor-pointer py-2' >FAQs</p>
                 </Link>
-                <Link to={"#"}>
+                <Link to={"https://www.github.com/hrq278"}>
                 <p className='hover:text-white cursor-pointer py-2' >Help Center</p>
                 </Link>
-                <Link to={"#"}>
+                <Link to={"https://www.github.com/hrq278"}>
                 <p className='hover:text-white cursor-pointer py-2' >Terms of Use</p>
                 </Link>
-                <Link to={"#"}>
+                <Link to={"https://www.github.com/hrq278"}>
                 <p className='hover:text-white cursor-pointer py-2' >Privacy</p>
                 </Link>
-                <Link to={"#"}>
+                <Link to={"https://www.github.com/hrq278"}>
                 <p className='hover:text-white cursor-pointer py-2' >Cookie Preferences</p>
                 </Link>
-                <Link to={"#"}>
+                <Link to={"https://www.github.com/hrq278"}>
                 <p className='hover:text-white cursor-pointer py-2' >Corporate Information</p>
                 </Link>
                 

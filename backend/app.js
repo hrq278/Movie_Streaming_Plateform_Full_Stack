@@ -31,4 +31,5 @@ app.use("/api/user/movie",verifyJWT, movieRoutes)
 app.use("/api/user/tvshow",verifyJWT ,tvShowRoutes)
 app.use("/api/user/search",verifyJWT ,searchRoutes)
 
+
 export { app }

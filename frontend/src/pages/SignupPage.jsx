@@ -1,20 +1,34 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
+import useAuthStore from '../store/authUser.store'
 
 
 const SignupPage = () => {
 
-  const [email, setEmail] = useState("")
+  const searchParams = new URLSearchParams(location.search)
+  const emailValue = searchParams.get('email')
+
+  const [email, setEmail] = useState( emailValue || "" )
   const [fullName, setFullName] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleSignup=(e)=>{
+  const { signup } = useAuthStore()
+  const navigate = useNavigate()
+
+
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log({email,fullName,password,username})
-  }
+
+    const success = await signup({ email, username, fullName, password });
+
+    if (success) {
+      navigate("/login");
+    }
+  };
+
+
 
 
   return (

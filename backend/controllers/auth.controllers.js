@@ -29,7 +29,7 @@ const signUp = asyncHandler( async (req, res) => {
 
     const image = profilePics[Math.floor( Math.random() * profilePics.length)]
 
-    const user = await User.create({
+    const createUser = await User.create({
         fullName,
         email,
         password,
@@ -37,34 +37,31 @@ const signUp = asyncHandler( async (req, res) => {
         image
     })
 
-    const createdUser = await User.findById(user._id)
+    const user = await User.findById(createUser._id)
     .select("-password -refreshToken")
 
-    if (!createdUser) {
+    if (!user) {
         throw new ApiError(500, "Try again Something went wrong while registering user")
     }
     
     return res.json(
-        new ApiResponse( 200, createdUser, "Account Created Successfully")
+        new ApiResponse( 200, user, "Account Created Successfully")
     )
-
-
-
 })
 
 const login = asyncHandler( async (req, res) => {
 
-    const { username, password } = req.body
+    const { email, password } = req.body
 
-    if (!username) {
-        throw new ApiError(400, "Username is Required")
+    if (!email) {
+        throw new ApiError(400, "email is Required")
     }
 
     if (!password || password?.length < 6) {
         throw new ApiError(400, "Password Required")   
     }
 
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
 
     if (!user) {
         throw new ApiError(404, "Account not found. Please sign up first")
@@ -164,9 +161,17 @@ const refreshAccessToken = asyncHandler( async (req,res) => {
     }
     
 } )
+
+const authCheck = asyncHandler( async (req, res) => {
+    const user = req.user
+    return res.status(200)
+    .json({user: user, message: "User is Authenticated"})
+} )
+
 export {
     signUp,
     login,
     logout,
-    refreshAccessToken
+    refreshAccessToken,
+    authCheck
 }

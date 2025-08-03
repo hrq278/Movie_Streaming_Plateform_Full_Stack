@@ -2,16 +2,16 @@ import React from 'react'
 import HeroPage from '../components/HeroPage'
 import AuthPage from '../components/AuthPage'
 import Navbar from '../components/Navbar'
+import useAuthStore from '../store/authUser.store'
 
 const HomePage = () => {
   
-  const isLoggedIn =false
+  const { user } = useAuthStore()
 
   return (
-    <div>
-      
-      {isLoggedIn ? <AuthPage /> : <HeroPage/>  }
-    </div>
+    <>
+      {user ? <AuthPage /> : <HeroPage/>  }
+    </>
   )
 }
 
