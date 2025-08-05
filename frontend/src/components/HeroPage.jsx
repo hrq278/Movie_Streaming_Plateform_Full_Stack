@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Navbar from './Navbar'
+import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 const HeroPage = () => {
@@ -15,7 +15,16 @@ const HeroPage = () => {
   return (
     <>
     <div className='hero-bg relative'>
-        <Navbar />
+         <div className='flex  items-center justify-around '>
+            <Link to={"/"}>
+            <img src="netflix-logo.png" alt="Netflix Logo" className='w-25 md:w-50  mt-7 mx-3 cursor-pointer'  />
+            </Link>
+                <div className="mt-4">
+                <Link to={"/login"}>
+                    <button className="py-2 px-4 mt-3 font-bold  text-white bg-red-600 rounded cursor-pointer ">Sign In</button>
+                </Link>
+                </div>
+            </div>
         <div className='flex flex-col max-w-6xl mx-auto py-40 text-center justify-center items-center text-white '>
             
             <div>

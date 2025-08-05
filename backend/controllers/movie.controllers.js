@@ -13,10 +13,10 @@ const trendingMovie = asyncHandler(async (req, res) => {
 
     const result = data.results;
 
-    const trendingMovie = result[Math.floor(Math.random() * result.length)];
+    const content = result[Math.floor(Math.random() * result.length)];
 
     return res.status(200).json(
-      new ApiResponse(200, trendingMovie, "Trending movie successfully fetched")
+      new ApiResponse(200, content, "Trending movie successfully fetched")
     );
 
   } catch (error) {

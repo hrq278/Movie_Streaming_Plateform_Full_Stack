@@ -13,10 +13,10 @@ const trendingTv = asyncHandler(async (req, res) => {
 
     const result = data.results;
 
-    const trendingtv = result[Math.floor(Math.random() * result.length)];
+    const content = result[Math.floor(Math.random() * result.length)];
 
     return res.status(200).json(
-      new ApiResponse(200, trendingtv, "Trending tv successfully fetched")
+      new ApiResponse(200, content, "Trending tv successfully fetched")
     );
 
   } catch (error) {
