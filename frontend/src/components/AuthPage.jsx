@@ -5,11 +5,14 @@ import useTrendingContent from '../hooks/useTrendingContent'
 import { MOVIE_CATEGORIES, ORIGINAL_IMAGE_BASE_URL, TV_CATEGORIES } from '../../utils/constants'
 import useContentStore from '../store/content.store'
 import ContentSlider from './ContentSlider'
+import { useState } from 'react'
 
 const AuthPage = () => {
 
   const { trendingContent } = useTrendingContent()
   const { contentType } = useContentStore()
+
+  const [imageLoading, setImageLaoding] = useState(true)
   
   if (!trendingContent) return(
     <div className='h-screen text-white relative'>
@@ -24,9 +27,15 @@ const AuthPage = () => {
     <>
     <div className='relative h-screen text-white  '>
       <Navbar />
+      {imageLoading && (
+        <div className='absolute top-0 left-0 w-full h-full bg-black/70 flex items-center justify-center shimmer -z-10 '>
+
+        </div>
+      )}
 
       <img src={ORIGINAL_IMAGE_BASE_URL+trendingContent?.backdrop_path } alt="Hero Image"
-      className='absolute top-0 left-0 w-full h-full object-cover object-center -z-50 ' />
+      className='absolute top-0 left-0 w-full h-full object-cover object-center -z-50 '
+      onLoad={()=>{setImageLaoding(false)}} />
       
       <div className='absolute top-0 left-0 w-full h-full bg-black/50 -z-50 '
       aria-hidden="true" />

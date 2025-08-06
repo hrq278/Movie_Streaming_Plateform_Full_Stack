@@ -90,11 +90,12 @@ const getMovieCategory = asyncHandler( async (req, res) => {
 
     try {
         const data = await fetchTMDB(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`)
+        const content = data.results
 
         return res
         .status(200)
         .json(
-            new ApiResponse(200, data.results, "Movie Category fetched")
+            new ApiResponse(200, content, "Movie Category fetched")
         )
     } catch (error) {
          if (error.message.includes("404")) {
