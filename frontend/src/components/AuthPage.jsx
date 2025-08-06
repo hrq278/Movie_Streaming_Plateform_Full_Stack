@@ -2,11 +2,14 @@ import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import { Info, Play } from 'lucide-react'
 import useTrendingContent from '../hooks/useTrendingContent'
-import { ORIGINAL_IMAGE_BASE_URL } from '../../utils/constants'
+import { MOVIE_CATEGORIES, ORIGINAL_IMAGE_BASE_URL, TV_CATEGORIES } from '../../utils/constants'
+import useContentStore from '../store/content.store'
+import ContentSlider from './ContentSlider'
 
 const AuthPage = () => {
 
   const { trendingContent } = useTrendingContent()
+  const { contentType } = useContentStore()
   
   if (!trendingContent) return(
     <div className='h-screen text-white relative'>
@@ -23,7 +26,7 @@ const AuthPage = () => {
       <Navbar />
 
       <img src={ORIGINAL_IMAGE_BASE_URL+trendingContent?.backdrop_path } alt="Hero Image"
-      className='absolute top-0 left-0 w-full h-full object-cover -z-50 ' />
+      className='absolute top-0 left-0 w-full h-full object-cover object-center -z-50 ' />
       
       <div className='absolute top-0 left-0 w-full h-full bg-black/50 -z-50 '
       aria-hidden="true" />
@@ -64,6 +67,15 @@ const AuthPage = () => {
         </div>
 
         </div>
+    </div>
+
+    <div className='flex flex-col gap10 bg-black py-10'>
+      {
+      contentType ==="movie" ? 
+       MOVIE_CATEGORIES.map((category) =><ContentSlider key={category} category={category} /> ) : 
+       TV_CATEGORIES.map((category)=><ContentSlider key={category} category={category} /> )
+      }
+
     </div>
     </>
   )
