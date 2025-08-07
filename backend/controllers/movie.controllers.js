@@ -30,11 +30,11 @@ const getMovieTrailer = asyncHandler( async (req, res) => {
 
     try {
         const data = await fetchTMDB(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`)
-    
+        const trailer = data.results
         return res
         .status(200)
         .json(
-            new ApiResponse(200, data, "Movie Trailer Fetched")
+            new ApiResponse(200, trailer, "Movie Trailer Fetched")
         )
     } catch (error) {
         if (error.message.includes("404")) {

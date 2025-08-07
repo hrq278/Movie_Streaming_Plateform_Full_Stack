@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage'
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
 import Footer from './components/Footer'
+import WatchPage from './pages/WatchPage'
 
 function App() {
   const { user, isCheckingAuth, authUserCheck } = useAuthStore()
@@ -35,6 +36,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={ !user ? <LoginPage /> : <Navigate to={"/"} /> } />
         <Route path="/signup" element={!user ? <SignupPage /> : <Navigate to={"/"} /> } />
+        <Route path="/watch/:id" element={user ? <WatchPage /> : <Navigate to={"/login"} /> } />
       </Routes>
       <Footer />
       <Toaster />
