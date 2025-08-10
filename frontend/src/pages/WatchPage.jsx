@@ -35,6 +35,8 @@ const WatchPage = () => {
             const res = await axios.get(`/api/user/${contentType}/trailers/${id}`)
             const data = res.data.data
             setTrailer(data)
+            console.log(data)
+            
 
         } catch (error) {
             if (error.message.includes("404")) {
@@ -53,8 +55,7 @@ const WatchPage = () => {
         const res = await axios.get(`/api/user/${contentType}/similar/${id}`)
         const data = res.data.data
         setSimilarContent(data)
-        console.log("similar",data)
-        
+
     } catch (error) {
         if (error.message.includes("404")) {
                 setSimilarContent(null)
@@ -72,7 +73,6 @@ const WatchPage = () => {
         const res = await axios.get(`/api/user/${contentType}/details/${id}`)
         const data = res.data.data
         setContent(data)
-        console.log("content",data)
         
     } catch (error) {
         if (error.message.includes("404")) {
@@ -107,11 +107,28 @@ const WatchPage = () => {
         }
     }
 
+    const formattedContentType = contentType === "movie" ? "Movie" : "TV Show"
+
+
     if (isLoading) return(
         <div className='min-h-screen bg-black p-10'>
             <WatchpageSkeleton/>
         </div>
     )
+    if (!content) {
+        return(
+            <div className='bg-black text-white h-screen'>
+                <div className='max-w-6xl mx-auto'>
+                    <Navbar/>
+                    <div className='text-center mx-auto px-4 py-8 h-full mt-40'>
+                        <h2 className='text-2xl sm:text-5xl font-bold text-balance'>
+                            Content not found
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     
   return (
@@ -141,29 +158,34 @@ const WatchPage = () => {
                 </div>
             )}
 
-            <div className='aspect-video mb-8 p-2 sm:px-10 md:px-32 '>
-                {trailer.length > 0 && (
-                    <ReactPlayer 
-                    controls={true}
-                    width={"100%"}
-                    height={"70vh"}
-                    className='mx-auto overflow-hidden rounded-lg '
-                    url={`https://www.youtube.com/watch?v=${trailer[currentTrailerIdx].key}`} />
-                )}
-
-                {trailer?.length === 0 && (
-                    <h2 className=' text-xl text-center mt-5'>
-                        No Trailers Availabe for (" ")
-                        <span className='font-bold text-red-600'>
-                            {content?.title || content?.name}
-                        </span>
-                    </h2>
-                )}
+            <div className="aspect-video mb-8 p-2 sm:px-10 md:px-32">
+                {trailer?.[currentTrailerIdx]?.key ? (
+                    <ReactPlayer
+                    controls
+                    width="100%"
+                    height="70vh"
+                    className="mx-auto overflow-hidden rounded-lg"
+                    url={`https://www.youtube.com/embed/${trailer[currentTrailerIdx].key}`}
+                    />
+                ) : trailer?.length === 0 ? (
+                        <h2 className="text-xl text-center mt-5">
+                        No Trailers Available for{" "}
+                            <span className="font-bold text-red-600">
+                                {content?.title || content?.name}
+                            </span>
+                        </h2>
+                ) : null}
             </div>
+
+            
+                            {/* separatorLine */}
+           <div className='w-full h-1 bg-[#232323] my-25' aria-hidden='true' />
+
                     {/* Movie Details */}
+                <h2 className='text-center text-6xl font-bold my-30 '>{formattedContentType} Overview</h2>
             <div className='flex flex-col md:flex-row items-center justify-between gap-20 max-w-6xl mx-auto '>
                 <div className=' mb-4 md:mb-0'>
-                    <h2 className='text-5xl font-bold text-balance '>
+                    <h2 className='text-5xl mb-10 font-bold text-balance '>
                         {content?.title || content?.name}
                     </h2>
                     <p className='mt-2 text-lg '>
@@ -183,6 +205,9 @@ const WatchPage = () => {
                 className='max-h-[600px] rounded-md  '/>
             </div>
 
+                                        {/* separatorLine */}
+           <div className='w-full h-1 bg-[#232323] my-25' aria-hidden='true' />
+
             {similarContent.length > 0 && (
                 <div className='mt-12 max-w-5xl mx-auto relative '>
                     <h3 className='text-3xl font-bold mb-4'>
@@ -191,7 +216,9 @@ const WatchPage = () => {
 
                     <div className='flex overflow-x-scroll scrollbar-hide gap-4 pb-4 group' ref={sliderRef}>
 
-                        {similarContent.map((content)=>(
+                        {similarContent.map((content)=>{
+                            if (content.poster_path === null)return null
+                            return(
                             <Link key={content.id} to={`/watch/${content.id}`} 
                             className='w-52 flex-none'>
 
@@ -202,7 +229,8 @@ const WatchPage = () => {
                                     {content.title || content.name}
                                 </h4>
                             </Link>
-                        ))}
+                        )
+                        })}
                         <ChevronRight
                         className='absolute top-1/2 -translate-y-1/2 right-2 w-8 h-8 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer bg-red-600 text-white rounded-full '
                         onClick={scrollRight} 

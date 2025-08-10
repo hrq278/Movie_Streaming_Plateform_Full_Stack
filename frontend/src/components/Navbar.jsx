@@ -25,27 +25,27 @@ const Navbar = () => {
       </div>
 
         {/* desktop navbar items */}
-      <div className="hidden sm:flex gap-2 items-center  ">
-          <Link to="/" className="hover:underline cursor-pointer " onClick={()=>setContentType("movie")} >
+      <div className="hidden sm:flex gap-4 items-center z-50 text-white/60 ">
+          <Link to="/" className="hover:underline cursor-pointer hover:text-white" onClick={()=>setContentType("movie")} >
           Movies
           </Link>
-          <Link to="/" className="hover:underline cursor-pointer" onClick={()=>setContentType("tvshow")} >
+          <Link to="/" className="hover:underline cursor-pointer hover:text-white" onClick={()=>setContentType("tvshow")} >
           Tv Shows
           </Link>
-          <Link to="/history" className="hover:underline " >
+          <Link to="/history" className="hover:underline cursor-pointer hover:text-white" >
           Search History
           </Link>
       </div>
         
-      <div className="flex gap-3 items-center z-50 ">
+      <div className="flex gap-2 sm:gap-4 items-center z-50  ">
           <Link to={"/search"}>
             <Search className="size-6 cursor-pointer " />
           </Link>
 
-          <img src={user.image} alt="avatar" className="size-6 rounded cursor-pointer "/>
+          <img src={user.image} alt="avatar" className="size-6 rounded cursor-pointer hidden sm:block"/>
 
           <Link to={"/"}>
-            <LogOut className="size-6 cursor-pointer " onClick={logout} />
+            <LogOut className="size-6 cursor-pointer  " onClick={logout} />
           </Link>
 
       <div className="sm:hidden">
@@ -56,6 +56,7 @@ const Navbar = () => {
 
     {isMobileMenuOpen && (
       <div className="w-full sm:hidden mt-4 hover:underline p-2 bg-black border rounded border-gray-800 ">
+
          <Link to="/" className="block p-2 hover:underline " onClick={toggleMobileMenu} >
           Movies
           </Link>
