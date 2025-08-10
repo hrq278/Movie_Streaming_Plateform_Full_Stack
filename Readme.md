@@ -1,6 +1,6 @@
 <h1 align="center">MERN Netflix Clone 🎬</h1>
 
-![Demo App](/frontend/public/supermanHeroPage.png)
+![Demo App](/frontend/public/Screenshot%202025-08-10%20162815.png)
 ![Demo App](/frontend/public/ScrollSection.png)
 
 ## Created By : `Haroon Rasheed`
