@@ -7,7 +7,10 @@ import cookieParser from "cookie-parser"
 const app = express()
 
 //middlewares
-app.use(cors())
+app.use(cors({
+  origin: "https://movie-streaming-plateform-full-stac.vercel.app",
+  credentials: true
+}))
 
 app.use(cookieParser())
 
