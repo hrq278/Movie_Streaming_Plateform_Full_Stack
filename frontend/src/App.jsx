@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import WatchPage from './pages/WatchPage'
 import SearchPage from './pages/SearchPage'
 import HistoryPage from './pages/HistoryPage'
+import NotFound404 from './pages/NotFound404'
 
 function App() {
   const { user, isCheckingAuth, authUserCheck } = useAuthStore()
@@ -41,6 +42,7 @@ function App() {
         <Route path="/watch/:id" element={user ? <WatchPage /> : <Navigate to={"/login"} /> } />
         <Route path="/search" element={user ? <SearchPage /> : <Navigate to={"/login"} /> } />
         <Route path="/history" element={user ? <HistoryPage /> : <Navigate to={"/login"} /> } />
+        <Route path="/*" element={<NotFound404/> } />
       </Routes>
       <Footer />
       <Toaster />

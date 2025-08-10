@@ -12,7 +12,7 @@ const SearchPage = () => {
     const [ searchTerm, setSearchTerm ] = useState("")
     const [ results, setResults ] = useState([])
     
-    const { contentType, setContentType } = useContentStore()
+    const { setContentType } = useContentStore()
 
     const handleTabsClick = (tab) => {
         setActiveTab(tab)
@@ -76,7 +76,7 @@ const SearchPage = () => {
                 return(
                     <div key={result.id} className='bg-gray-800 p-4 rounded'>
                         {activeTab === "person" ? (
-                            <Link to={"/actor/"+result.name} className='flex flex-col items-center'>
+                            <div className='flex flex-col items-center'>
                                 <img 
                                 src={ORIGINAL_IMAGE_BASE_URL+ result.profile_path} 
                                 alt="Person Image"
@@ -84,9 +84,9 @@ const SearchPage = () => {
                                 <h2 className='mt-2 text-xl font-bold'>
                                     {result.name}
                                 </h2>
-                            </Link>
+                            </div>
                         ) : (
-                            <Link to={"/watch/"+result.id}>
+                            <Link to={"/watch/"+result.id} onClick={()=>{setContentType(activeTab)}} >
                                 <img 
                                 src={ORIGINAL_IMAGE_BASE_URL+result.poster_path} 
                                 alt={result.name || result.title}
