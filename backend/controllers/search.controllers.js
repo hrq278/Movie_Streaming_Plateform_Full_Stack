@@ -29,7 +29,7 @@ const searchPerson = asyncHandler(async (req, res) => {
           id: person.id,
           Image: person.profile_path,
           title: person.name,
-          person: "person",
+          type: "person",
           createdAt: new Date()
         },
       },
@@ -76,7 +76,7 @@ const searchMovie = asyncHandler( async (req, res) => {
                     id: movie.id,
                     Image: movie.poster_path,
                     title: movie.title,
-                    movie: "movie",
+                    type: "movie",
                     createdAt: new Date()
                 }
             }
@@ -119,7 +119,7 @@ const searchTvShow = asyncHandler( async (req, res) => {
                     id: tvShow.id,
                     Image: tvShow.poster_path,
                     title: tvShow.name,
-                    tvShow: "Tv Show",
+                    type: "Tv Show",
                     createdAt: new Date()
                 }
             }

@@ -9,6 +9,6 @@ router.get("/tvshow/:query", searchTvShow)
 
 router.get("/history", searchHistory)
 
-router.delete("/delete-history/:id", deleteHistory)
+router.delete("/delete/:id", deleteHistory)
 
 export default router
